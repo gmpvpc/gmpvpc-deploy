@@ -3,15 +3,26 @@
 ## Vagrant commands
 
 - Create your test VM
-		vagrant up
+
+        vagrant up
+
 - Run ansible playbook on your test VM
-		vagrant provision
+
+        vagrant provision
+
 - Halt your test VM
-		vagrant halt
+
+        vagrant halt
+
 - Destroy your test VM
-		vagrant destroy
+
+        vagrant destroy
 
 ## Ansible commands
 
 - Run playbook
-		ansible-playbook gmpvpc.yml
+
+        ansible-playbook gmpvpc.yml
+
+
+
