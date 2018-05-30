@@ -1,6 +1,6 @@
 ---
 - name: GMPVPC-3000
-  hosts: all
+  hosts: rpi
   become: yes
   become_user: root
 
