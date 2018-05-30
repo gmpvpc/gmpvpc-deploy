@@ -21,7 +21,7 @@
 ```
 ## Ansible commands
 
-- Run playbook
+- Run playbook on Production Environment
 ```sh
-        ansible-playbook gmpvpc.yml
+        ansible-playbook gmpvpc.yml -i inventories/raspberry/
 ```
