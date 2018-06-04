@@ -5,50 +5,80 @@
   become_user: root
 
   tasks:
-  # - name: Install apt-transport-https
-  #   apt:
-  #     name: apt-transport-https
-  #     state: latest
+  - name: Install apt-transport-https
+    apt:
+      name: apt-transport-https
+      state: latest
 
-  # - name: Add NodeJS GPG key
-  #   apt_key:
-  #     url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
-  #     state: present
+  - name: Add NodeJS GPG key
+    apt_key:
+      url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+      state: present
 
-  # - name: Add NodeJS repository
-  #   apt_repository:
-  #     repo: "deb https://deb.nodesource.com/node trusty main"
+  - name: Add NodeJS repository
+    apt_repository:
+      repo: "deb https://deb.nodesource.com/node_8.x stretch main"
 
-  # - name: Update APT repositories
-  #   apt:
-  #     update_cache: yes
-  #     upgrade: dist
+  - name: Add NodeJS source repository
+    apt_repository:
+      repo: "deb-src https://deb.nodesource.com/node_8.x stretch main"
 
-  # - name: Install PostgreSQL
-  #   apt:
-  #     name: postgresql
-  #     state: latest
+  - name: Update APT repositories
+    apt:
+      update_cache: yes
+      upgrade: dist
 
-  # - name: Install NodeJS
-  #   apt:
-  #     name: nodejs
-  #     state: latest
+  - name: Install PostgreSQL
+    apt:
+      name: postgresql
+      state: latest
 
-  # - name: Install InfluxDB
-  #   apt:
-  #     name: influxdb
-  #     state: latest
+  - name: Install NodeJS
+    apt:
+      name: nodejs
+      install_recommends: yes
+      state: latest
 
-  # - name: Check that PostgreSQL is running
-  #   systemd:
-  #     name: postgresql
-  #     state: started
+  - name: Install NPM
+    apt:
+      name: npm
+      state: latest
 
-  # - name: Check that InfluxDB is running
-  #   systemd:
-  #     name: influxdb
-  #     state: started
+  - name: Install InfluxDB
+    apt:
+      name: influxdb
+      state: latest
+
+  - name: Check that PostgreSQL is running
+    systemd:
+      name: postgresql
+      state: started
+
+  - name: Check that InfluxDB is running
+    systemd:
+      name: influxdb
+      state: started
 
   - name: checkout git repo
     become: no
-    local_action: git repo=git@gmpvpc.ddns.net:gmpvpc/gmpvpc-ble.git dest=/tmp/gmpvpc-ble/
+    local_action:
+      module: git
+      repo: git@gmpvpc.ddns.net:gmpvpc/gmpvpc-ble.git
+      dest: /tmp/gmpvpc-ble/
+  
+  - name: Push application to remote server
+    become: no
+    synchronize:
+      use_ssh_args: yes
+      mode: push
+      recursive: yes
+      src: /tmp/gmpvpc-ble/
+      dest: ~/gmpvpc-ble/
+      rsync_opts:
+        - "--exclude=.git"
+
+  - name: Run NPM install
+    become: no
+    command: npm install
+    args:
+      chdir: ~/gmpvpc-ble/
