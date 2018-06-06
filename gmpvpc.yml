@@ -39,6 +39,13 @@
       install_recommends: yes
       state: latest
 
+  - name: Install build essentials
+    apt:
+      name: build-essential
+      install_recommends: yes
+      state: latest
+
+
   - name: Install NPM
     apt:
       name: npm
@@ -65,13 +72,13 @@
       module: git
       repo: git@gmpvpc.ddns.net:gmpvpc/gmpvpc-ble.git
       dest: /tmp/gmpvpc-ble/
-  
+
   - name: Push application to remote server
     become: no
     synchronize:
+      recursive: yes
       use_ssh_args: yes
       mode: push
-      recursive: yes
       src: /tmp/gmpvpc-ble/
       dest: ~/gmpvpc-ble/
       rsync_opts:
@@ -79,6 +86,5 @@
 
   - name: Run NPM install
     become: no
-    command: npm install
-    args:
-      chdir: ~/gmpvpc-ble/
+    npm:
+      path: ~/gmpvpc-ble/
