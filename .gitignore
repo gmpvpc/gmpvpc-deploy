@@ -1,6 +1,7 @@
 ### Ansible ###
 *.retry
-
+*.log
 ### Vagrant ###
 .vagrant/
 *.box
+~vagrant/

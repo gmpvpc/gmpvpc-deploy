@@ -1,0 +1,13 @@
+[Unit]
+Description=GMPVPC
+After=network.target
+
+[Service]
+Type=simple
+User=gmpvpc
+ExecStart=/usr/bin/gmpvpcd start
+ExecStop=/usr/bin/gmpvpcd stop
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
