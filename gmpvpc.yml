@@ -5,65 +5,65 @@
   become_user: root
 
   tasks:
-  # - name: Install apt-transport-https
-  #   apt:
-  #     name: apt-transport-https
-  #     state: latest
+  - name: Install apt-transport-https
+    apt:
+      name: apt-transport-https
+      state: latest
 
-  # - name: Add NodeJS GPG key
-  #   apt_key:
-  #     url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
-  #     state: present
+  - name: Add NodeJS GPG key
+    apt_key:
+      url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+      state: present
 
-  # - name: Add NodeJS repository
-  #   apt_repository:
-  #     repo: "deb https://deb.nodesource.com/node_8.x stretch main"
+  - name: Add NodeJS repository
+    apt_repository:
+      repo: "deb https://deb.nodesource.com/node_8.x stretch main"
 
-  # - name: Add NodeJS source repository
-  #   apt_repository:
-  #     repo: "deb-src https://deb.nodesource.com/node_8.x stretch main"
+  - name: Add NodeJS source repository
+    apt_repository:
+      repo: "deb-src https://deb.nodesource.com/node_8.x stretch main"
 
-  # - name: Update APT repositories
-  #   apt:
-  #     update_cache: yes
-  #     upgrade: dist
+  - name: Update APT repositories
+    apt:
+      update_cache: yes
+      upgrade: dist
 
-  # - name: Install PostgreSQL
-  #   apt:
-  #     name: postgresql
-  #     state: latest
+  - name: Install PostgreSQL
+    apt:
+      name: postgresql
+      state: latest
 
-  # - name: Install NodeJS
-  #   apt:
-  #     name: nodejs
-  #     install_recommends: yes
-  #     state: latest
+  - name: Install NodeJS
+    apt:
+      name: nodejs
+      install_recommends: yes
+      state: latest
 
-  # - name: Install build essentials
-  #   apt:
-  #     name: build-essential
-  #     install_recommends: yes
-  #     state: latest
+  - name: Install build essentials
+    apt:
+      name: build-essential
+      install_recommends: yes
+      state: latest
 
-  # - name: Install NPM
-  #   apt:
-  #     name: npm
-  #     state: latest
+  - name: Install NPM
+    apt:
+      name: npm
+      state: latest
 
-  # - name: Install InfluxDB
-  #   apt:
-  #     name: influxdb
-  #     state: latest
+  - name: Install InfluxDB
+    apt:
+      name: influxdb
+      state: latest
 
-  # - name: Check that PostgreSQL is running
-  #   systemd:
-  #     name: postgresql
-  #     state: started
+  - name: Check that PostgreSQL is running
+    systemd:
+      name: postgresql
+      state: started
 
-  # - name: Check that InfluxDB is running
-  #   systemd:
-  #     name: influxdb
-  #     state: started
+  - name: Check that InfluxDB is running
+    systemd:
+      name: influxdb
+      state: started
 
   - name: Create UNIX user named 'gmpvpc'
     user:
