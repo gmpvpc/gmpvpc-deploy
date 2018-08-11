@@ -33,6 +33,16 @@
       name: postgresql
       state: latest
 
+  - name: Install RabbitMQ
+    apt:
+      name: rabbitmq-server
+      state: latest
+
+  - name: Add user 'gmpvpc' to AMQP
+    rabbitmq_user:
+      user: gmpvpc
+      password: gmpvpc
+
   - name: Install NodeJS
     apt:
       name: nodejs
@@ -43,11 +53,6 @@
     apt:
       name: build-essential
       install_recommends: yes
-      state: latest
-
-  - name: Install NPM
-    apt:
-      name: npm
       state: latest
 
   - name: Install InfluxDB
